@@ -96,4 +96,4 @@ async def get_restart(message: Message, state: FSMContext) -> None:
 @router.message(Command("id"))
 async def show_user_id(message: Message) -> None:
     """Обрабатывает команду /ID."""
-    await message.answer(f"Твой ID: {message.from_user.id}")
+    await message.answer(f"Твой ID: {message.from_user.id}", reply_markup=get_empty_keyboard())
