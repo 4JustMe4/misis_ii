@@ -1,4 +1,4 @@
-BOOKS_UID = {
+BOOKS_UID = { # name : uid
     'My': "123"
 }
 
