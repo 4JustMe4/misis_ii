@@ -91,6 +91,14 @@ FROM books bk
 WHERE bk.uid = ?;
 '''
 
+TRANSACTION_SELECT_BOOK_BY_NAME = '''
+SELECT
+    bk.uid AS uid,
+    bk.name AS name,
+    bk.author AS author
+FROM books bk
+WHERE bk.name = ?;
+'''
 
 class Database:
   def __init__(self, db_path = 'var/db.sqlite3'):
@@ -144,6 +152,12 @@ class Database:
     if len(items) == 0:
       return None
     return items[0]
+  def get_book_by_title(self, book_name):
+    self.cur.execute(TRANSACTION_SELECT_BOOK_BY_NAME, (book_name,))
+    items = self.cur.fetchall()
+    if len(items) == 0:
+      return None
+    return items[0]
 
 
 if __name__ == "__main__":
@@ -175,5 +189,6 @@ if __name__ == "__main__":
 
   print(db.get_book('034543191X'))
   print(db.get_book('0679423079'))
+  print(db.get_book_by_title("Where You'll Find Me: And Other Stories"))
   print(db.get_book('0679'))
 

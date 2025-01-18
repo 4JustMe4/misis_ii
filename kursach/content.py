@@ -75,11 +75,9 @@ famous_books = y[y].index
 final_ratings = filtered_rating[filtered_rating['Book-Title'].isin(famous_books)]
 
 # Creating a pivot table 'pt' using the .pivot_table() function on the 'final_ratings' DataFrame
-pt = final_ratings.pivot_table(index='Book-Title', columns='User-ID', values='Book-Rating')
+pt = final_ratings.pivot_table(index='Book-Title', columns=['User-ID'], values='Book-Rating')
 
 # Filling any missing values (NaN) in the pivot table 'pt' with zeros
 pt.fillna(0, inplace=True)
 
 similarity_scores = cosine_similarity(pt)
-
-print(pt)
